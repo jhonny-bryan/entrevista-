@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejemplo de Contar Parejas de Paquetes</title>
+</head>
+<body>
+
+<script>
+  function contarParejasDePaquetes(pesos, N) {
+    let contadorParejas = 0;
+    const paquetesDisponibles = {};
+
+    for (let peso of pesos) {
+      const complemento = N - peso;
+
+      // Verificar si el complemento está disponible en los paquetes restantes
+      if (paquetesDisponibles[complemento] > 0) {
+        contadorParejas++;
+        // Reducir la cantidad de paquetes disponibles con el complemento
+        paquetesDisponibles[complemento]--;
+      } else {
+        // Incrementar la cantidad de paquetes disponibles con el peso actual
+        paquetesDisponibles[peso] = (paquetesDisponibles[peso] || 0) + 1;
+      }
+    }
+
+    return contadorParejas;
+  }
+
+  // Ejemplo de uso
+  const pesosPaquetes = [5, 3, 2, 5, 6, 1, 4, 7, 9];
+  const N = 10;
+  const resultado = contarParejasDePaquetes(pesosPaquetes, N);
+  console.log(resultado); // Debería imprimir 4
+</script>
+
+</body>
+</html>
